@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pope and Mussolini: Comparative Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e8e8e8;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #f0a500;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #b8b8b8;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .timeline-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        
+        .historical {
+            background: linear-gradient(135deg, #8b4513 0%, #d2691e 100%);
+        }
+        
+        .contemporary {
+            background: linear-gradient(135deg, #1e3a5f 0%, #4a90e2 100%);
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #f0a500 0%, #4a90e2 100%);
+        }
+        
+        .timeline-entry {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 60px;
+            position: relative;
+            width: 45%;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .timeline-entry:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
+            z-index: 10;
+        }
+        
+        .timeline-entry.historical-entry {
+            left: 0;
+            border-left: 5px solid #d2691e;
+        }
+        
+        .timeline-entry.contemporary-entry {
+            left: 55%;
+            border-left: 5px solid #4a90e2;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f0a500;
+            border: 4px solid #1a1a2e;
+            top: 30px;
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-entry.historical-entry .timeline-dot {
+            right: -62px;
+        }
+        
+        .timeline-entry.contemporary-entry .timeline-dot {
+            left: -62px;
+        }
+        
+        .timeline-entry:hover .timeline-dot {
+            transform: scale(1.5);
+            box-shadow: 0 0 20px #f0a500;
+        }
+        
+        .entry-date {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #f0a500;
+            margin-bottom: 10px;
+        }
+        
+        .entry-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        
+        .entry-description {
+            color: #d0d0d0;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .entry-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .timeline-entry.active .entry-content {
+            max-height: 2000px;
+        }
+        
+        .entry-quote {
+            background: rgba(240, 165, 0, 0.1);
+            border-left: 3px solid #f0a500;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #f5deb3;
+        }
+        
+        .entry-analysis {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            color: #e0e0e0;
+            margin-top: 15px;
+        }
+        
+        .analysis-title {
+            font-weight: bold;
+            color: #f0a500;
+            margin-bottom: 8px;
+        }
+        
+        .expand-btn {
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        
+        .expand-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 165, 0, 0.5);
+        }
+        
+        .timeline-entry.active .expand-btn {
+            background: linear-gradient(135deg, #666 0%, #999 100%);
+        }
+        
+        @media (max-width: 1024px) {
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-entry {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+            
+            .timeline-entry .timeline-dot {
+                left: -51px !important;
+                right: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Pope and Mussolini</h1>
+        <div class="subtitle">A Comparative Timeline: When Churches Embrace Power (1922-2025)</div>
+        
+        <div class="timeline-legend">
+            <div class="legend-item">
+                <div class="legend-box historical"></div>
+                <span><strong>Timeline A:</strong> Historical Events (1920s-1940s)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box contemporary"></div>
+                <span><strong>Timeline B:</strong> Contemporary Parallels (2015-2025)</span>
+            </div>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-entry historical-entry">
+                <div class="timeline-dot"></div>
+                <div class="entry-date">⏰ February 11, 1929</div>
+                <div class="entry-title">📜 The Lateran Accords Signed</div>
+                <div class="entry-description">
+                    The most significant moment in the Church-Fascist alliance. The Lateran Accords resolved the "Roman Question," creating Vatican City as an independent state and making Catholicism Italy's official religion.
+                </div>
+                <button class="expand-btn" onclick="toggleEntry(this)">Read More ▼</button>
+                
+                <div class="entry-content">
+                    <div class="entry-quote">
+                        "In exchange for Vatican support, Mussolini restored many of the privileges the Church had lost and gave in to the pope's demands that the police enforce Catholic morality." (Kertzer, p. 12)
+                    </div>
+                    <div class="entry-analysis">
+                        <div class="analysis-title">📊 Analysis:</div>
+                        This treaty gave Mussolini unprecedented legitimacy—the Pope's blessing made Fascism acceptable to millions of Italian Catholics who might otherwise have resisted. It demonstrates how religious institutions can provide "moral laundering" for authoritarian regimes in exchange for institutional power. The agreement included massive financial compensation to the Church, control over marriage law and education, and recognition of the Italian state by the Vatican. This mutual dependency created a pattern where moral principles became negotiable for political gain. The contemporary parallel is striking: religious leaders today similarly exchange endorsements of morally problematic leaders for Supreme Court seats, policy victories on abortion, and cultural influence. The Lateran Accords show the long-term cost—the Church's moral authority was permanently compromised, and it remained largely silent as Fascism descended into imperialism and alliance with Nazi Germany.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-entry contemporary-entry">
+                <div class="timeline-dot"></div>
+                <div class="entry-date">⏰ June 2015 - January 2021</div>
+                <div class="entry-title">🗳️ Trump-Evangelical Alliance Forms</div>
+                <div class="entry-description">
+                    Donald Trump, a thrice-married casino owner with questionable moral credentials, forges an unprecedented alliance with white evangelical Christians, promising them Supreme Court justices and policy victories.
+                </div>
+                <button class="expand-btn" onclick="toggleEntry(this)">Read More ▼</button>
+                
+                <div class="entry-content">
+                    <div class="entry-quote">
+                        "Both men shared a distrust of democracy and a visceral hatred of Communism... [creating] a treacherous bargain." (Kertzer, p. 8)
+                    </div>
+                    <div class="entry-analysis">
+                        <div class="analysis-title">📊 Analysis:</div>
+                        The Trump-evangelical alliance mirrors the Pope-Mussolini relationship in striking ways. White evangelical leaders, despite Trump's personal conduct contradicting their stated values, embraced him as a transactional partner. Like Pius XI overlooking Mussolini's violence and vulgarity, evangelical leaders rationalized Trump's behavior by focusing on deliverables: three Supreme Court justices (Neil Gorsuch, Brett Kavanaugh, Amy Coney Barrett), numerous federal judges, moving the U.S. embassy to Jerusalem, and policies restricting abortion access. Leaders like Jerry Falwell Jr., Franklin Graham, and Paula White served as intermediaries, similar to Father Tacchi Venturi's role. Both alliances demonstrate how religious institutions compromise moral authority for political power, justify means by ends, and find shared enemies (communism/socialism, "secular elites," media) more unifying than shared values. The pattern reveals that such bargains corrupt both parties—the religious institution loses prophetic voice while the political leader gains legitimacy without accountability.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleEntry(button) {
+            // Get the parent timeline entry
+            const entry = button.closest('.timeline-entry');
+            const isActive = entry.classList.contains('active');
+            
+            // Close all entries
+            document.querySelectorAll('.timeline-entry').forEach(item => {
+                item.classList.remove('active');
+                const btn = item.querySelector('.expand-btn');
+                if (btn) btn.textContent = 'Read More ▼';
+            });
+            
+            // Open clicked entry if it wasn't already open
+            if (!isActive) {
+                entry.classList.add('active');
+                button.textContent = 'Read Less ▲';
+            }
+        }
+        
+        // Add scroll animation on page load
+        window.addEventListener('load', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.timeline-entry').forEach(entry => {
+                entry.style.opacity = '0';
+                entry.style.transform = 'translateY(50px)';
+                entry.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(entry);
+            });
+        });
+    </script>
+</body>
+</html>
